@@ -18,6 +18,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -33,7 +35,7 @@ jobs:
         run: |
           git config user.name "pond-scanner"
           git config user.email "actions@github.com"
-          git pull --rebase
           git add REPORT.md history.csv
           git diff --cached --quiet || git commit -m "Scan $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git pull --rebase -X theirs
           git push
