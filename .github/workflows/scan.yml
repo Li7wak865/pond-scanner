@@ -1,0 +1,38 @@
+name: pond-scanner
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pond-scanner
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run scanner
+        run: python scanner.py
+
+      - name: Commit report
+        run: |
+          git config user.name "pond-scanner"
+          git config user.email "actions@github.com"
+          git add REPORT.md history.csv
+          git diff --cached --quiet || git commit -m "Scan $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
