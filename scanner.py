@@ -57,13 +57,20 @@ def scan_funding():
         vol = t.get("vol24h", 0) or 0
         if fr is None or mark in (None, 0) or vol == 0:
             continue
-        # Kraken reports an absolute hourly funding rate; normalize by price
-        # to get a relative hourly rate, then annualize (approximation).
-        rel_hourly = float(fr) / float(mark)
+        # Kraken funding conventions differ by contract family:
+        #   PI_ (inverse perps): fundingRate is ABSOLUTE (quote ccy) -> divide by price
+        #   PF_ (linear perps):  fundingRate is already RELATIVE per hour
+        if sym.startswith("PI_"):
+            rel_hourly = float(fr) / float(mark)
+        else:
+            rel_hourly = float(fr)
         annual = rel_hourly * 24 * 365
+        # sanity cap: discard obviously-broken values (>1000%/yr either way)
+        if abs(annual) > 10:
+            continue
         rows.append({"symbol": sym, "annual": annual, "vol24h": float(vol)})
     # rank by absolute annualized funding, keep liquid ones only
-    rows = [r for r in rows if r["vol24h"] > 100_000]
+    rows = [r for r in rows if r["vol24h"] > 500_000]
     rows.sort(key=lambda r: abs(r["annual"]), reverse=True)
     hot = [r for r in rows if abs(r["annual"]) >= FUNDING_HOT_ANNUAL]
     return {"top": rows[:8], "hot": hot}
