@@ -33,6 +33,7 @@ jobs:
         run: |
           git config user.name "pond-scanner"
           git config user.email "actions@github.com"
+          git pull --rebase
           git add REPORT.md history.csv
           git diff --cached --quiet || git commit -m "Scan $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push
