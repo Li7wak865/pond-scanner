@@ -1,32 +1,32 @@
 # Pond Scanner Report
-**Scan time:** 2026-07-21 14:23 UTC
+**Scan time:** 2026-07-21 19:52 UTC
 
-**Flags this scan:** 8 
+**Flags this scan:** 10 
 
 ## 1. Funding skew (crowded positioning)
 | | Perp | Annualized funding | 24h vol |
 |---|---|---|---|
-| 🟢 | PF_HYPEUSD | +879.1% | $542,765 |
-| 🟢 | PF_SOLUSD | +273.9% | $670,928 |
-| 🟢 | PF_NEARUSD | -60.8% | $1,342,514 |
-| 🟢 | PF_RAREUSD | +55.8% | $709,344 |
-| 🟢 | PF_SYNUSD | +36.3% | $2,153,896 |
-| 🟢 | PF_DOTUSD | +34.9% | $4,352,892 |
-| 🟢 | PF_SPXUSD | +31.9% | $688,834 |
-| ⚪ | PF_ZEREBROUSD | +25.7% | $1,844,199 |
+| 🟢 | PF_HYPEUSD | -453.3% | $643,994 |
+| 🟢 | PF_SOLUSD | -164.3% | $531,581 |
+| 🟢 | PF_NEARUSD | -67.9% | $1,669,843 |
+| 🟢 | PF_TRUMPUSD | +54.7% | $542,366 |
+| 🟢 | PF_SPXUSD | +51.5% | $604,254 |
+| 🟢 | PF_MOVEUSD | +47.5% | $2,439,773 |
+| 🟢 | PF_JTOUSD | -35.7% | $569,108 |
+| 🟢 | PF_GRIFFAINUSD | +35.1% | $726,999 |
 
 _🟢 = crowd paying >30%/yr to hold a side. Historically mean-reverting; also a froth gauge. Rate math is approximate._
 
 ## 2. Cross-exchange basis (US venues)
-- ⚪ **BTC** gap **0.022%** (gemini → kraken) — coinbase: $66,664.00, kraken: $66,678.00, gemini: $66,663.44
-- ⚪ **ETH** gap **0.018%** (gemini → kraken) — coinbase: $1,931.39, kraken: $1,931.47, gemini: $1,931.12
+- ⚪ **BTC** gap **0.005%** (kraken → gemini) — coinbase: $66,462.77, kraken: $66,462.40, gemini: $66,465.72
+- ⚪ **ETH** gap **0.010%** (kraken → gemini) — coinbase: $1,923.42, kraken: $1,923.37, gemini: $1,923.56
 
 _Gaps under ~0.3% are normal noise/fees. Persistent large gaps usually mean withdrawal friction somewhere — information either way._
 
 ## 3. Small-coin radar (ranks ~250-500, whale-free zone)
 | Coin | Rank | Mcap | 24h vol/mcap | 24h move |
 |---|---|---|---|---|
-| Lorenzo Protocol (BANK) | #350 | $67.4M | 2.59x | -44.2% |
+| Lorenzo Protocol (BANK) | #329 | $73.2M | 2.68x | -39.8% |
 
 _⚠️ WATCHLIST ONLY. Volume spikes in small coins are often pumps, listings, or news. Research before touching; never a buy signal by itself._
 
