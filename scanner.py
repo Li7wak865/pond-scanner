@@ -10,6 +10,9 @@ Modules (each fails gracefully if an API is down/blocked):
   2. CROSS-EXCHANGE BASIS - spot price gaps between US venues
   3. SMALL-COIN RADAR - unusual activity in coins too small for funds
   4. VOLATILITY REGIME - is the market trending or chopping right now?
+  5. STABLECOIN PEGS   - mechanical panic-discounts on USD-pegged coins
+  6. VOL SPIKE         - sudden volatility explosions (dislocation windows)
+  7. FUNDING PERSISTENCE - how many DAYS each crowded perp has stayed crowded
 
 A scanner that always finds treasure is lying. Most runs should say
 "nothing rich right now" - that's the tool working correctly.
@@ -32,6 +35,8 @@ SMALLCOIN_VOL_MCAP = 0.50      # 24h volume > 50% of market cap
 SMALLCOIN_MOVE_PCT = 15.0      # and |24h move| > 15%
 ER_TRENDING = 0.35             # efficiency ratio thresholds
 ER_CHOPPY = 0.20
+PEG_DEV_PCT = 0.3              # stablecoin deviation from $1.00 worth flagging
+VOLSPIKE_RATIO = 2.0           # 24h realized vol > 2x its 30d norm
 
 
 def get_json(url: str, params=None):
@@ -172,18 +177,120 @@ def scan_regime():
     return out
 
 
+
+
+# ------------------- Module 5: Stablecoin peg monitor -------------------
+STABLES = {"tether": "USDT", "usd-coin": "USDC", "dai": "DAI",
+           "first-digital-usd": "FDUSD", "ethena-usde": "USDe",
+           "paypal-usd": "PYUSD"}
+
+
+def scan_stablecoins():
+    """USD-pegged coins should trade at $1.00. Deviations are mechanical
+    stress signals: small persistent discounts = redemption friction;
+    large ones = panic (historically brief and mean-reverting, but the
+    tail risk is total collapse - never a casual trade)."""
+    j = get_json("https://api.coingecko.com/api/v3/simple/price",
+                 params={"ids": ",".join(STABLES), "vs_currencies": "usd"})
+    out = []
+    for cid, sym in STABLES.items():
+        p = (j.get(cid) or {}).get("usd")
+        if p is None:
+            continue
+        dev = (p - 1.0) * 100
+        out.append({"sym": sym, "price": p, "dev": dev,
+                    "hot": abs(dev) >= PEG_DEV_PCT})
+    out.sort(key=lambda x: abs(x["dev"]), reverse=True)
+    return out
+
+
+# ------------------- Module 6: Volatility spike -------------------
+def scan_vol_spike():
+    """Flags when last-24h realized vol explodes vs the trailing month.
+    Spikes mark dislocation windows: spreads widen, forced flows appear,
+    and short-term dislocations are most likely. A weather siren."""
+    out = []
+    for label, pair in [("BTC", "XBTUSD"), ("ETH", "ETHUSD")]:
+        j = get_json("https://api.kraken.com/0/public/OHLC",
+                     params={"pair": pair, "interval": 60})
+        key = [k for k in j["result"] if k != "last"][0]
+        closes = [float(r[4]) for r in j["result"][key]]
+        if len(closes) < 200:
+            continue
+        rets = [(closes[i] - closes[i-1]) / closes[i-1]
+                for i in range(1, len(closes))]
+
+        def ann_vol(rs):
+            m = sum(rs) / len(rs)
+            var = sum((r - m) ** 2 for r in rs) / len(rs)
+            return (var ** 0.5) * ((24 * 365) ** 0.5) * 100
+
+        v24 = ann_vol(rets[-24:])
+        v30d = ann_vol(rets)
+        ratio = v24 / v30d if v30d else 0
+        out.append({"asset": label, "v24": v24, "v30d": v30d,
+                    "ratio": ratio, "hot": ratio >= VOLSPIKE_RATIO})
+    return out
+
+
+# ------------------- Module 7: Funding persistence tracker -------------------
+STATE_FILE = "funding_state.csv"
+
+
+def scan_funding_persistence(funding):
+    """Tracks how long each crowded perp has STAYED crowded, across runs.
+    Persistence is the difference between a fleeting blip and a real,
+    durable structural payment - this is the sensor the funding-harvest
+    hypothesis needs."""
+    today = NOW.strftime("%Y-%m-%d")
+    old = {}
+    if os.path.exists(STATE_FILE):
+        with open(STATE_FILE) as f:
+            for row in csv.DictReader(f):
+                old[row["symbol"]] = row
+    hot_now = {r["symbol"]: r["annual"] for r in (funding or {}).get("hot", [])}
+
+    active, state_rows = [], []
+    for sym, annual in hot_now.items():
+        prev = old.get(sym)
+        first = prev["first_seen"] if prev else today
+        worst = max(abs(float(prev["worst_annual"])) if prev else 0,
+                    abs(annual))
+        days = (datetime.strptime(today, "%Y-%m-%d")
+                - datetime.strptime(first, "%Y-%m-%d")).days + 1
+        active.append({"sym": sym, "days": days, "now": annual,
+                       "worst": worst})
+        state_rows.append({"symbol": sym, "first_seen": first,
+                           "worst_annual": f"{worst:.4f}"})
+    resolved = []
+    for sym, row in old.items():
+        if sym not in hot_now:
+            days = (datetime.strptime(today, "%Y-%m-%d")
+                    - datetime.strptime(row["first_seen"], "%Y-%m-%d")).days + 1
+            resolved.append({"sym": sym, "days": days,
+                             "worst": float(row["worst_annual"])})
+    with open(STATE_FILE, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["symbol", "first_seen", "worst_annual"])
+        w.writeheader()
+        w.writerows(state_rows)
+    active.sort(key=lambda x: x["days"], reverse=True)
+    return {"active": active, "resolved": resolved}
+
+
 # ------------------- Report writer -------------------
 def light(hot: bool, warm: bool = False) -> str:
     return "🟢" if hot else ("🟡" if warm else "⚪")
 
 
-def write_report(funding, basis, small, regime, errors):
+def write_report(funding, basis, small, regime, stables, volspike, persist, errors):
     L = []
     L.append(f"# Pond Scanner Report")
     L.append(f"**Scan time:** {NOW.strftime('%Y-%m-%d %H:%M UTC')}")
     L.append("")
     n_hot = (len(funding["hot"]) if funding else 0) \
-        + sum(1 for b in (basis or []) if b["hot"]) + len(small or [])
+        + sum(1 for b in (basis or []) if b["hot"]) + len(small or []) \
+        + sum(1 for s in (stables or []) if s["hot"]) \
+        + sum(1 for v in (volspike or []) if v["hot"])
     L.append(f"**Flags this scan:** {n_hot} "
              f"{'— quiet market, nothing rich. That is normal.' if n_hot == 0 else ''}")
     L.append("")
@@ -244,6 +351,52 @@ def write_report(funding, basis, small, regime, errors):
                  "bot to sit in cash a lot (correct behavior)._")
     L.append("")
 
+
+    L.append("## 5. Stablecoin pegs (mechanical stress gauge)")
+    if stables is None:
+        L.append("_Data source unavailable this run._")
+    else:
+        for s in stables:
+            L.append(f"- {light(s['hot'])} **{s['sym']}** ${s['price']:.4f} "
+                     f"({s['dev']:+.2f}% vs peg)")
+        L.append("")
+        L.append("_Flags at ±0.3%. Small persistent discounts = redemption friction; "
+                 "large = panic. Tail risk on depegs is total loss - observation, not a trade._")
+    L.append("")
+
+    L.append("## 6. Volatility spike (dislocation weather siren)")
+    if volspike is None:
+        L.append("_Data source unavailable this run._")
+    else:
+        for v in volspike:
+            L.append(f"- {light(v['hot'])} **{v['asset']}** 24h vol {v['v24']:.0f}% "
+                     f"vs 30d norm {v['v30d']:.0f}% ({v['ratio']:.1f}x)")
+        L.append("")
+        L.append("_>2x = markets dislocating; spreads widen and forced flows appear. "
+                 "Expect the momentum bot and basis gaps to behave unusually._")
+    L.append("")
+
+    L.append("## 7. Funding persistence (days each perp has stayed crowded)")
+    if persist is None:
+        L.append("_Tracker unavailable this run._")
+    else:
+        if persist["active"]:
+            L.append("| Perp | Days crowded | Funding now | Worst seen |")
+            L.append("|---|---|---|---|")
+            for a in persist["active"]:
+                L.append(f"| {a['sym']} | {a['days']} | {a['now']*100:+.1f}% "
+                         f"| {a['worst']*100:.1f}% |")
+        else:
+            L.append("No perps currently crowded. ⚪")
+        if persist["resolved"]:
+            L.append("")
+            L.append("**Resolved since last scan:** "
+                     + ", ".join(f"{r['sym']} (crowded {r['days']}d, worst {r['worst']*100:.0f}%)"
+                                 for r in persist["resolved"]))
+        L.append("")
+        L.append("_Persistence separates blips from durable structural payments - "
+                 "the raw evidence file for the funding-harvest hypothesis._")
+    L.append("")
     if errors:
         L.append("## Data issues this run")
         for e in errors:
@@ -279,7 +432,8 @@ def main():
     errors = []
     results = {}
     for name, fn in [("funding", scan_funding), ("basis", scan_basis),
-                     ("small", scan_small_coins), ("regime", scan_regime)]:
+                     ("small", scan_small_coins), ("regime", scan_regime),
+                     ("stables", scan_stablecoins), ("volspike", scan_vol_spike)]:
         try:
             results[name] = fn()
             print(f"[ok] {name}")
@@ -288,8 +442,15 @@ def main():
             errors.append(f"{name}: {type(e).__name__}: {e}")
             print(f"[FAIL] {name}: {e}")
 
+    try:
+        results["persist"] = scan_funding_persistence(results["funding"])
+    except Exception as e:
+        results["persist"] = None
+        errors.append(f"persistence: {type(e).__name__}: {e}")
+
     write_report(results["funding"], results["basis"], results["small"],
-                 results["regime"], errors)
+                 results["regime"], results["stables"], results["volspike"],
+                 results["persist"], errors)
     append_history(results["funding"], results["basis"], results["small"],
                    results["regime"])
     print("Report written to REPORT.md")
