@@ -1,74 +1,70 @@
 # Pond Scanner Report
-**Scan time:** 2026-07-30 09:03 UTC
+**Scan time:** 2026-07-30 14:32 UTC
 
-**Flags this scan:** 14 
+**Flags this scan:** 9 
 
 ## 1. Funding skew (crowded positioning)
 | | Perp | Annualized funding | 24h vol |
 |---|---|---|---|
-| 🟢 | PF_KAITOUSD | -326.1% | $748,133 |
-| 🟢 | PF_CTSIUSD | +71.4% | $1,629,001 |
-| 🟢 | PF_SPXUSD | +66.7% | $523,254 |
-| 🟢 | PF_UNIUSD | +61.1% | $976,102 |
-| 🟢 | PF_COTIUSD | -59.3% | $131,432,276 |
-| 🟢 | PF_SAGAUSD | +53.7% | $810,607 |
-| 🟢 | PF_SOONUSD | +47.2% | $1,188,290 |
-| 🟢 | PF_SYNUSD | +43.0% | $1,191,056 |
+| 🟢 | PF_SOLUSD | +421.2% | $502,958 |
+| 🟢 | PF_KAITOUSD | -56.8% | $1,041,283 |
+| 🟢 | PF_SOONUSD | +52.5% | $961,965 |
+| 🟢 | PF_UNIUSD | +44.9% | $1,061,448 |
+| 🟢 | PF_SYNUSD | +41.8% | $1,214,206 |
+| 🟢 | PF_COTIUSD | -37.3% | $129,417,400 |
+| ⚪ | PF_XRPUSD | +28.8% | $18,825,432 |
+| ⚪ | PF_ETHFIUSD | +17.2% | $876,654 |
 
 _🟢 = crowd paying >30%/yr to hold a side. Historically mean-reverting; also a froth gauge. Rate math is approximate._
 
 ## 2. Cross-exchange basis (US venues)
-- ⚪ **BTC** gap **0.021%** (kraken → gemini) — coinbase: $64,214.03, kraken: $64,209.80, gemini: $64,223.02
-- ⚪ **ETH** gap **0.050%** (kraken → gemini) — coinbase: $1,912.70, kraken: $1,912.26, gemini: $1,913.21
+- ⚪ **BTC** gap **0.006%** (coinbase → kraken) — coinbase: $64,768.47, kraken: $64,772.60, gemini: $64,769.03
+- ⚪ **ETH** gap **0.013%** (kraken → gemini) — coinbase: $1,921.97, kraken: $1,921.91, gemini: $1,922.16
 
 _Gaps under ~0.3% are normal noise/fees. Persistent large gaps usually mean withdrawal friction somewhere — information either way._
 
 ## 3. Small-coin radar (ranks ~250-500, whale-free zone)
 | Coin | Rank | Mcap | 24h vol/mcap | 24h move |
 |---|---|---|---|---|
-| COTI (COTI) | #426 | $48.4M | 3.69x | +25.2% |
-| Lorenzo Protocol (BANK) | #423 | $49.1M | 2.53x | -36.1% |
-| Espresso (ESP) | #438 | $49.5M | 0.84x | +17.7% |
-| RE (RE) | #304 | $75.8M | 0.74x | +15.1% |
-| Cash Cat (CASHCAT) | #441 | $46.7M | 0.62x | +18.8% |
+| Espresso (ESP) | #442 | $46.5M | 1.27x | +21.2% |
+| Semicon Bull 3X ETF (bStocks Tokenized Stock) (SOXLB) | #455 | $44.1M | 1.26x | +16.7% |
+| Cash Cat (CASHCAT) | #460 | $43.4M | 0.67x | +25.5% |
 
 _⚠️ WATCHLIST ONLY. Volume spikes in small coins are often pumps, listings, or news. Research before touching; never a buy signal by itself._
 
 ## 4. Volatility regime (feeds your momentum bot)
-- 🔴 **BTC: CHOPPY** — efficiency ratio 0.01, realized vol 10d 26% vs 60d 38%
-- 🔴 **ETH: CHOPPY** — efficiency ratio 0.18, realized vol 10d 39% vs 60d 56%
+- 🔴 **BTC: CHOPPY** — efficiency ratio 0.04, realized vol 10d 27% vs 60d 38%
+- 🔴 **ETH: CHOPPY** — efficiency ratio 0.19, realized vol 10d 40% vs 60d 56%
 
 _TRENDING = momentum strategies feed well. CHOPPY = expect your momentum bot to sit in cash a lot (correct behavior)._
 
 ## 5. Stablecoin pegs (mechanical stress gauge)
-- 🟢 **FDUSD** $0.9968 (-0.32% vs peg)
-- ⚪ **USDT** $0.9989 (-0.11% vs peg)
-- ⚪ **USDe** $0.9993 (-0.07% vs peg)
-- ⚪ **USDC** $0.9995 (-0.05% vs peg)
-- ⚪ **PYUSD** $0.9996 (-0.04% vs peg)
+- ⚪ **FDUSD** $0.9971 (-0.29% vs peg)
+- ⚪ **USDT** $0.9991 (-0.09% vs peg)
+- ⚪ **USDC** $0.9996 (-0.04% vs peg)
+- ⚪ **USDe** $0.9997 (-0.03% vs peg)
 - ⚪ **DAI** $1.0000 (-0.00% vs peg)
+- ⚪ **PYUSD** $1.0000 (-0.00% vs peg)
 
 _Flags at ±0.3%. Small persistent discounts = redemption friction; large = panic. Tail risk on depegs is total loss - observation, not a trade._
 
 ## 6. Volatility spike (dislocation weather siren)
-- ⚪ **BTC** 24h vol 45% vs 30d norm 34% (1.3x)
-- ⚪ **ETH** 24h vol 55% vs 30d norm 46% (1.2x)
+- ⚪ **BTC** 24h vol 42% vs 30d norm 34% (1.2x)
+- ⚪ **ETH** 24h vol 52% vs 30d norm 45% (1.1x)
 
 _>2x = markets dislocating; spreads widen and forced flows appear. Expect the momentum bot and basis gaps to behave unusually._
 
 ## 7. Funding persistence (days each perp has stayed crowded)
 | Perp | Days crowded | Funding now | Worst seen |
 |---|---|---|---|
-| PF_SYNUSD | 4 | +43.0% | 79.8% |
-| PF_KAITOUSD | 2 | -326.1% | 326.1% |
-| PF_CTSIUSD | 1 | +71.4% | 71.4% |
-| PF_SPXUSD | 1 | +66.7% | 66.7% |
-| PF_UNIUSD | 1 | +61.1% | 61.1% |
-| PF_COTIUSD | 1 | -59.3% | 59.3% |
-| PF_SAGAUSD | 1 | +53.7% | 53.7% |
-| PF_SOONUSD | 1 | +47.2% | 47.2% |
+| PF_SYNUSD | 4 | +41.8% | 79.8% |
+| PF_KAITOUSD | 2 | -56.8% | 326.1% |
+| PF_SOLUSD | 1 | +421.2% | 421.2% |
+| PF_SOONUSD | 1 | +52.5% | 52.5% |
+| PF_UNIUSD | 1 | +44.9% | 61.1% |
+| PF_COTIUSD | 1 | -37.3% | 59.3% |
 
-**Resolved since last scan:** PF_XRPUSD (crowded 1d, worst 30%)
+**Resolved since last scan:** PF_CTSIUSD (crowded 1d, worst 71%), PF_SPXUSD (crowded 1d, worst 67%), PF_SAGAUSD (crowded 1d, worst 54%)
 
 _Persistence separates blips from durable structural payments - the raw evidence file for the funding-harvest hypothesis._
 
