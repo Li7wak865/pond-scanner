@@ -1,71 +1,69 @@
 # Pond Scanner Report
-**Scan time:** 2026-09-17 21:23 UTC
+**Scan time:** 2026-09-18 04:45 UTC
 
-**Flags this scan:** 10 
+**Flags this scan:** 8 
 
 ## 1. Funding skew (crowded positioning)
 | | Perp | Annualized funding | 24h vol |
 |---|---|---|---|
-| 🟢 | PF_LSKUSD | -960.6% | $2,078,162 |
-| 🟢 | PF_NATGASUSD | +124.6% | $581,259 |
-| 🟢 | PF_MUBARAKUSD | -108.3% | $10,562,020 |
-| 🟢 | PF_NEARUSD | +102.9% | $5,639,774 |
-| 🟢 | PF_UNIUSD | +94.2% | $1,891,574 |
-| 🟢 | PF_FILUSD | -34.4% | $1,045,701 |
-| ⚪ | PF_ASTERUSD | -28.3% | $665,195 |
-| ⚪ | PF_SUIUSD | +27.9% | $6,869,864 |
+| 🟢 | PF_NEARUSD | +159.8% | $5,998,381 |
+| 🟢 | PF_UNIUSD | -101.5% | $2,892,237 |
+| 🟢 | PF_ETHFIUSD | +60.2% | $736,533 |
+| 🟢 | PF_DOTUSD | +40.0% | $1,911,986 |
+| 🟢 | PF_XRPUSD | +37.0% | $35,994,920 |
+| 🟢 | PF_HFTUSD | +33.9% | $1,668,466 |
+| 🟢 | PF_SUIUSD | +31.5% | $8,424,081 |
+| ⚪ | PF_ASTERUSD | -23.3% | $559,815 |
 
 _🟢 = crowd paying >30%/yr to hold a side. Historically mean-reverting; also a froth gauge. Rate math is approximate._
 
 ## 2. Cross-exchange basis (US venues)
-- ⚪ **BTC** gap **0.018%** (coinbase → gemini) — coinbase: $76,463.93, kraken: $76,467.00, gemini: $76,477.73
-- ⚪ **ETH** gap **0.035%** (gemini → kraken) — coinbase: $2,449.58, kraken: $2,449.62, gemini: $2,448.77
+- ⚪ **BTC** gap **0.015%** (gemini → coinbase) — coinbase: $77,381.46, kraken: $77,379.70, gemini: $77,369.84
+- ⚪ **ETH** gap **0.131%** (gemini → kraken) — coinbase: $2,475.27, kraken: $2,475.29, gemini: $2,472.04
 
 _Gaps under ~0.3% are normal noise/fees. Persistent large gaps usually mean withdrawal friction somewhere — information either way._
 
 ## 3. Small-coin radar (ranks ~250-500, whale-free zone)
 | Coin | Rank | Mcap | 24h vol/mcap | 24h move |
 |---|---|---|---|---|
-| COTI (COTI) | #364 | $69.8M | 1.35x | +34.8% |
-| Canopy (CNPY) | #411 | $59.1M | 1.09x | +35.6% |
-| Lisk (LSK) | #274 | $101.9M | 0.94x | -40.3% |
-| MarsCoin (MARSCOIN) | #252 | $115.6M | 0.67x | +29.6% |
+| COTI (COTI) | #367 | $69.8M | 1.85x | +31.9% |
 
 _⚠️ WATCHLIST ONLY. Volume spikes in small coins are often pumps, listings, or news. Research before touching; never a buy signal by itself._
 
 ## 4. Volatility regime (feeds your momentum bot)
-- 🔴 **BTC: CHOPPY** — efficiency ratio 0.07, realized vol 10d 28% vs 60d 39%
-- 🔴 **ETH: CHOPPY** — efficiency ratio 0.01, realized vol 10d 40% vs 60d 59%
+- 🔴 **BTC: CHOPPY** — efficiency ratio 0.04, realized vol 10d 29% vs 60d 39%
+- 🔴 **ETH: CHOPPY** — efficiency ratio 0.02, realized vol 10d 41% vs 60d 59%
 
 _TRENDING = momentum strategies feed well. CHOPPY = expect your momentum bot to sit in cash a lot (correct behavior)._
 
 ## 5. Stablecoin pegs (mechanical stress gauge)
-- ⚪ **FDUSD** $0.9981 (-0.19% vs peg)
-- ⚪ **PYUSD** $0.9993 (-0.07% vs peg)
-- ⚪ **USDT** $0.9993 (-0.07% vs peg)
-- ⚪ **USDe** $0.9994 (-0.06% vs peg)
+- ⚪ **FDUSD** $0.9983 (-0.17% vs peg)
+- ⚪ **USDT** $0.9992 (-0.08% vs peg)
+- ⚪ **USDe** $0.9992 (-0.08% vs peg)
 - ⚪ **USDC** $0.9996 (-0.04% vs peg)
-- ⚪ **DAI** $1.0000 (-0.00% vs peg)
+- ⚪ **PYUSD** $0.9996 (-0.04% vs peg)
+- ⚪ **DAI** $0.9999 (-0.01% vs peg)
 
 _Flags at ±0.3%. Small persistent discounts = redemption friction; large = panic. Tail risk on depegs is total loss - observation, not a trade._
 
 ## 6. Volatility spike (dislocation weather siren)
-- ⚪ **BTC** 24h vol 21% vs 30d norm 42% (0.5x)
-- ⚪ **ETH** 24h vol 32% vs 30d norm 60% (0.5x)
+- ⚪ **BTC** 24h vol 18% vs 30d norm 42% (0.4x)
+- ⚪ **ETH** 24h vol 26% vs 30d norm 60% (0.4x)
 
 _>2x = markets dislocating; spreads widen and forced flows appear. Expect the momentum bot and basis gaps to behave unusually._
 
 ## 7. Funding persistence (days each perp has stayed crowded)
 | Perp | Days crowded | Funding now | Worst seen |
 |---|---|---|---|
-| PF_NEARUSD | 2 | +102.9% | 137.4% |
-| PF_LSKUSD | 1 | -960.6% | 960.6% |
-| PF_NATGASUSD | 1 | +124.6% | 124.6% |
-| PF_MUBARAKUSD | 1 | -108.3% | 108.3% |
-| PF_UNIUSD | 1 | +94.2% | 311.9% |
-| PF_FILUSD | 1 | -34.4% | 34.4% |
+| PF_NEARUSD | 3 | +159.8% | 159.8% |
+| PF_UNIUSD | 2 | -101.5% | 311.9% |
+| PF_ETHFIUSD | 1 | +60.2% | 60.2% |
+| PF_DOTUSD | 1 | +40.0% | 40.0% |
+| PF_XRPUSD | 1 | +37.0% | 37.0% |
+| PF_HFTUSD | 1 | +33.9% | 33.9% |
+| PF_SUIUSD | 1 | +31.5% | 31.5% |
 
-**Resolved since last scan:** PF_ETHFIUSD (crowded 1d, worst 109%), PF_SYNUSD (crowded 2d, worst 86%), PF_SUIUSD (crowded 1d, worst 49%), PF_DOTUSD (crowded 1d, worst 39%), PF_ASTERUSD (crowded 1d, worst 31%)
+**Resolved since last scan:** PF_LSKUSD (crowded 2d, worst 961%), PF_NATGASUSD (crowded 2d, worst 125%), PF_MUBARAKUSD (crowded 2d, worst 108%), PF_FILUSD (crowded 2d, worst 34%)
 
 _Persistence separates blips from durable structural payments - the raw evidence file for the funding-harvest hypothesis._
 
