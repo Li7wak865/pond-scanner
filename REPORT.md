@@ -1,25 +1,25 @@
 # Pond Scanner Report
-**Scan time:** 2026-10-10 12:33 UTC
+**Scan time:** 2026-10-10 21:45 UTC
 
 **Flags this scan:** 4 
 
 ## 1. Funding skew (crowded positioning)
 | | Perp | Annualized funding | 24h vol |
 |---|---|---|---|
-| 🟢 | PF_KAIAUSD | -68.8% | $18,182,761 |
-| 🟢 | PF_DOTUSD | +53.0% | $2,684,491 |
-| 🟢 | PF_WLDUSD | +36.4% | $1,810,883 |
-| ⚪ | PF_XRPUSD | +29.4% | $7,301,328 |
-| ⚪ | PF_ZROUSD | -26.0% | $914,988 |
-| ⚪ | PF_NEARUSD | +22.8% | $3,297,875 |
-| ⚪ | PF_FILUSD | -18.8% | $1,937,619 |
-| ⚪ | PF_EIGENUSD | -17.0% | $595,004 |
+| 🟢 | PF_ATOMUSD | -211.8% | $540,851 |
+| 🟢 | PF_NEARUSD | +44.5% | $3,252,899 |
+| 🟢 | PF_DOTUSD | +38.3% | $1,753,767 |
+| 🟢 | PF_FILUSD | -31.2% | $1,802,295 |
+| ⚪ | PF_WLDUSD | +28.4% | $2,332,949 |
+| ⚪ | PF_TIAUSD | -28.0% | $2,127,554 |
+| ⚪ | PF_JTOUSD | +26.3% | $1,425,928 |
+| ⚪ | PF_SUIUSD | -24.8% | $5,433,561 |
 
 _🟢 = crowd paying >30%/yr to hold a side. Historically mean-reverting; also a froth gauge. Rate math is approximate._
 
 ## 2. Cross-exchange basis (US venues)
-- ⚪ **BTC** gap **0.019%** (coinbase → gemini) — coinbase: $82,776.17, kraken: $82,779.00, gemini: $82,792.31
-- ⚪ **ETH** gap **0.005%** (coinbase → kraken) — coinbase: $2,494.93, kraken: $2,495.06, gemini: $2,494.99
+- ⚪ **BTC** gap **0.002%** (kraken → coinbase) — coinbase: $83,015.63, kraken: $83,014.00, gemini: $83,015.56
+- ⚪ **ETH** gap **0.010%** (kraken → coinbase) — coinbase: $2,507.98, kraken: $2,507.74, gemini: $2,507.86
 
 _Gaps under ~0.3% are normal noise/fees. Persistent large gaps usually mean withdrawal friction somewhere — information either way._
 
@@ -27,35 +27,36 @@ _Gaps under ~0.3% are normal noise/fees. Persistent large gaps usually mean with
 Nothing unusual. ⚪
 
 ## 4. Volatility regime (feeds your momentum bot)
-- 🔴 **BTC: CHOPPY** — efficiency ratio 0.08, realized vol 10d 27% vs 60d 43%
-- 🟡 **ETH: MIXED** — efficiency ratio 0.23, realized vol 10d 37% vs 60d 61%
+- 🔴 **BTC: CHOPPY** — efficiency ratio 0.10, realized vol 10d 27% vs 60d 43%
+- 🟡 **ETH: MIXED** — efficiency ratio 0.21, realized vol 10d 38% vs 60d 61%
 
 _TRENDING = momentum strategies feed well. CHOPPY = expect your momentum bot to sit in cash a lot (correct behavior)._
 
 ## 5. Stablecoin pegs (mechanical stress gauge)
-- 🟢 **FDUSD** $0.9969 (-0.31% vs peg)
+- ⚪ **FDUSD** $0.9970 (-0.30% vs peg)
 - ⚪ **USDT** $0.9992 (-0.08% vs peg)
-- ⚪ **USDe** $0.9994 (-0.06% vs peg)
+- ⚪ **USDe** $0.9993 (-0.07% vs peg)
 - ⚪ **USDC** $0.9997 (-0.03% vs peg)
-- ⚪ **PYUSD** $0.9998 (-0.02% vs peg)
-- ⚪ **DAI** $1.0000 (+0.00% vs peg)
+- ⚪ **PYUSD** $0.9997 (-0.03% vs peg)
+- ⚪ **DAI** $0.9998 (-0.02% vs peg)
 
 _Flags at ±0.3%. Small persistent discounts = redemption friction; large = panic. Tail risk on depegs is total loss - observation, not a trade._
 
 ## 6. Volatility spike (dislocation weather siren)
-- ⚪ **BTC** 24h vol 18% vs 30d norm 34% (0.5x)
-- ⚪ **ETH** 24h vol 17% vs 30d norm 45% (0.4x)
+- ⚪ **BTC** 24h vol 8% vs 30d norm 34% (0.2x)
+- ⚪ **ETH** 24h vol 13% vs 30d norm 45% (0.3x)
 
 _>2x = markets dislocating; spreads widen and forced flows appear. Expect the momentum bot and basis gaps to behave unusually._
 
 ## 7. Funding persistence (days each perp has stayed crowded)
 | Perp | Days crowded | Funding now | Worst seen |
 |---|---|---|---|
-| PF_KAIAUSD | 2 | -68.8% | 250.9% |
-| PF_DOTUSD | 1 | +53.0% | 53.0% |
-| PF_WLDUSD | 1 | +36.4% | 36.4% |
+| PF_ATOMUSD | 1 | -211.8% | 211.8% |
+| PF_NEARUSD | 1 | +44.5% | 44.5% |
+| PF_DOTUSD | 1 | +38.3% | 53.0% |
+| PF_FILUSD | 1 | -31.2% | 31.2% |
 
-**Resolved since last scan:** PF_ZROUSD (crowded 5d, worst 176%), PF_PONSUSD (crowded 2d, worst 48%), PF_TIAUSD (crowded 2d, worst 40%), PF_SUIUSD (crowded 2d, worst 41%)
+**Resolved since last scan:** PF_KAIAUSD (crowded 2d, worst 251%), PF_WLDUSD (crowded 1d, worst 36%)
 
 _Persistence separates blips from durable structural payments - the raw evidence file for the funding-harvest hypothesis._
 
