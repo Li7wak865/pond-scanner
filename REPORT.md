@@ -1,65 +1,69 @@
 # Pond Scanner Report
-**Scan time:** 2026-10-28 05:43 UTC
+**Scan time:** 2026-10-28 12:57 UTC
 
-**Flags this scan:** 4 
+**Flags this scan:** 8 
 
 ## 1. Funding skew (crowded positioning)
 | | Perp | Annualized funding | 24h vol |
 |---|---|---|---|
-| 🟢 | PF_NEARUSD | +54.7% | $2,341,552 |
-| 🟢 | PF_BBUSD | +33.0% | $781,479 |
-| ⚪ | PF_XRPUSD | +27.4% | $7,631,526 |
-| ⚪ | PF_ZROUSD | +26.6% | $664,970 |
-| ⚪ | PF_DOTUSD | -23.2% | $1,048,896 |
-| ⚪ | PF_BATUSD | -18.9% | $601,464 |
-| ⚪ | PF_APTUSD | +12.7% | $537,932 |
-| ⚪ | PF_WLDUSD | -11.6% | $6,181,583 |
+| 🟢 | PF_NEARUSD | -141.8% | $2,060,090 |
+| 🟢 | PF_GRASSUSD | +77.6% | $526,797 |
+| 🟢 | PF_APTUSD | -52.9% | $941,130 |
+| 🟢 | PF_ARCUSD | -42.9% | $984,273 |
+| 🟢 | PF_SUIUSD | -34.1% | $2,876,459 |
+| 🟢 | PF_SYNUSD | +30.1% | $1,418,955 |
+| ⚪ | PF_DOTUSD | -27.3% | $1,655,464 |
+| ⚪ | PF_SPXUSD | -22.7% | $519,051 |
 
 _🟢 = crowd paying >30%/yr to hold a side. Historically mean-reverting; also a froth gauge. Rate math is approximate._
 
 ## 2. Cross-exchange basis (US venues)
-- ⚪ **BTC** gap **0.047%** (coinbase → gemini) — coinbase: $80,827.69, kraken: $80,837.20, gemini: $80,865.73
-- ⚪ **ETH** gap **0.017%** (coinbase → gemini) — coinbase: $2,349.52, kraken: $2,349.61, gemini: $2,349.93
+- ⚪ **BTC** gap **0.019%** (coinbase → kraken) — coinbase: $80,617.47, kraken: $80,632.90, gemini: $80,630.17
+- ⚪ **ETH** gap **0.020%** (coinbase → gemini) — coinbase: $2,336.14, kraken: $2,336.35, gemini: $2,336.61
 
 _Gaps under ~0.3% are normal noise/fees. Persistent large gaps usually mean withdrawal friction somewhere — information either way._
 
 ## 3. Small-coin radar (ranks ~250-500, whale-free zone)
 | Coin | Rank | Mcap | 24h vol/mcap | 24h move |
 |---|---|---|---|---|
-| Dolphin (POD) | #440 | $50.2M | 1.55x | +27.9% |
-| Semicon Bull 3X ETF (bStocks Tokenized ETF) (SOXLB) | #395 | $60.3M | 1.24x | +16.8% |
+| Initia (INIT) | #473 | $48.5M | 1.13x | +39.3% |
+| Dolphin (POD) | #480 | $48.0M | 0.89x | -15.1% |
 
 _⚠️ WATCHLIST ONLY. Volume spikes in small coins are often pumps, listings, or news. Research before touching; never a buy signal by itself._
 
 ## 4. Volatility regime (feeds your momentum bot)
-- 🔴 **BTC: CHOPPY** — efficiency ratio 0.05, realized vol 10d 24% vs 60d 34%
-- 🟡 **ETH: MIXED** — efficiency ratio 0.21, realized vol 10d 27% vs 60d 40%
+- 🔴 **BTC: CHOPPY** — efficiency ratio 0.07, realized vol 10d 24% vs 60d 34%
+- 🟡 **ETH: MIXED** — efficiency ratio 0.23, realized vol 10d 27% vs 60d 40%
 
 _TRENDING = momentum strategies feed well. CHOPPY = expect your momentum bot to sit in cash a lot (correct behavior)._
 
 ## 5. Stablecoin pegs (mechanical stress gauge)
-- ⚪ **FDUSD** $0.9974 (-0.26% vs peg)
-- ⚪ **USDT** $0.9988 (-0.12% vs peg)
-- ⚪ **USDe** $0.9993 (-0.07% vs peg)
-- ⚪ **USDC** $0.9994 (-0.06% vs peg)
-- ⚪ **DAI** $0.9999 (-0.01% vs peg)
-- ⚪ **PYUSD** $0.9999 (-0.01% vs peg)
+- ⚪ **FDUSD** $0.9975 (-0.25% vs peg)
+- ⚪ **USDT** $0.9987 (-0.13% vs peg)
+- ⚪ **USDe** $0.9992 (-0.08% vs peg)
+- ⚪ **USDC** $0.9993 (-0.07% vs peg)
+- ⚪ **DAI** $0.9997 (-0.03% vs peg)
+- ⚪ **PYUSD** $0.9998 (-0.02% vs peg)
 
 _Flags at ±0.3%. Small persistent discounts = redemption friction; large = panic. Tail risk on depegs is total loss - observation, not a trade._
 
 ## 6. Volatility spike (dislocation weather siren)
-- ⚪ **BTC** 24h vol 22% vs 30d norm 31% (0.7x)
-- ⚪ **ETH** 24h vol 29% vs 30d norm 43% (0.7x)
+- ⚪ **BTC** 24h vol 24% vs 30d norm 31% (0.8x)
+- ⚪ **ETH** 24h vol 32% vs 30d norm 43% (0.7x)
 
 _>2x = markets dislocating; spreads widen and forced flows appear. Expect the momentum bot and basis gaps to behave unusually._
 
 ## 7. Funding persistence (days each perp has stayed crowded)
 | Perp | Days crowded | Funding now | Worst seen |
 |---|---|---|---|
-| PF_NEARUSD | 1 | +54.7% | 54.7% |
-| PF_BBUSD | 1 | +33.0% | 33.0% |
+| PF_NEARUSD | 1 | -141.8% | 141.8% |
+| PF_GRASSUSD | 1 | +77.6% | 77.6% |
+| PF_APTUSD | 1 | -52.9% | 52.9% |
+| PF_ARCUSD | 1 | -42.9% | 42.9% |
+| PF_SUIUSD | 1 | -34.1% | 34.1% |
+| PF_SYNUSD | 1 | +30.1% | 30.1% |
 
-**Resolved since last scan:** PF_ZROUSD (crowded 2d, worst 93%)
+**Resolved since last scan:** PF_BBUSD (crowded 1d, worst 33%)
 
 _Persistence separates blips from durable structural payments - the raw evidence file for the funding-harvest hypothesis._
 
