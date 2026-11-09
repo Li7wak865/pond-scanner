@@ -1,63 +1,65 @@
 # Pond Scanner Report
-**Scan time:** 2026-11-08 22:06 UTC
+**Scan time:** 2026-11-09 06:33 UTC
 
 **Flags this scan:** 5 
 
 ## 1. Funding skew (crowded positioning)
 | | Perp | Annualized funding | 24h vol |
 |---|---|---|---|
-| 🟢 | PF_TRUMPUSD | -138.7% | $1,504,679 |
-| 🟢 | PF_NEARUSD | -110.2% | $2,685,289 |
-| 🟢 | PF_UNIUSD | -95.7% | $514,171 |
-| ⚪ | PF_SUSHIUSD | -26.6% | $569,135 |
-| ⚪ | PF_XRPUSD | +16.5% | $21,679,071 |
-| ⚪ | PF_TIAUSD | +14.7% | $731,697 |
-| ⚪ | PF_DOTUSD | -13.8% | $1,738,599 |
-| ⚪ | PF_MELANIAUSD | -12.6% | $978,139 |
+| 🟢 | PF_UNIUSD | +64.0% | $648,137 |
+| 🟢 | PF_TRUMPUSD | -49.1% | $3,332,705 |
+| ⚪ | PF_ASTERUSD | +26.5% | $701,987 |
+| ⚪ | PF_NEARUSD | +21.8% | $3,234,748 |
+| ⚪ | PF_SUIUSD | +19.7% | $4,319,743 |
+| ⚪ | PF_XTZUSD | -18.2% | $1,039,870 |
+| ⚪ | PF_TRXUSD | -14.1% | $1,756,921 |
+| ⚪ | PF_ACEUSD | +13.6% | $2,719,319 |
 
 _🟢 = crowd paying >30%/yr to hold a side. Historically mean-reverting; also a froth gauge. Rate math is approximate._
 
 ## 2. Cross-exchange basis (US venues)
-- ⚪ **BTC** gap **0.128%** (gemini → kraken) — coinbase: $73,977.00, kraken: $74,022.20, gemini: $73,927.74
-- ⚪ **ETH** gap **0.139%** (gemini → kraken) — coinbase: $2,104.92, kraken: $2,105.37, gemini: $2,102.45
+- ⚪ **BTC** gap **0.040%** (coinbase → gemini) — coinbase: $74,179.19, kraken: $74,189.90, gemini: $74,209.04
+- ⚪ **ETH** gap **0.042%** (gemini → coinbase) — coinbase: $2,115.30, kraken: $2,115.17, gemini: $2,114.41
 
 _Gaps under ~0.3% are normal noise/fees. Persistent large gaps usually mean withdrawal friction somewhere — information either way._
 
 ## 3. Small-coin radar (ranks ~250-500, whale-free zone)
 | Coin | Rank | Mcap | 24h vol/mcap | 24h move |
 |---|---|---|---|---|
-| Holo (HOT) | #332 | $71.5M | 0.52x | +15.9% |
+| Janction (JCT) | #266 | $102.0M | 2.23x | +198.0% |
+| Holo (HOT) | #301 | $80.6M | 0.63x | +30.6% |
 
 _⚠️ WATCHLIST ONLY. Volume spikes in small coins are often pumps, listings, or news. Research before touching; never a buy signal by itself._
 
 ## 4. Volatility regime (feeds your momentum bot)
-- 🟡 **BTC: MIXED** — efficiency ratio 0.32, realized vol 10d 46% vs 60d 38%
-- 🟡 **ETH: MIXED** — efficiency ratio 0.33, realized vol 10d 72% vs 60d 48%
+- 🟢 **BTC: TRENDING** — efficiency ratio 0.38, realized vol 10d 44% vs 60d 37%
+- 🟢 **ETH: TRENDING** — efficiency ratio 0.38, realized vol 10d 69% vs 60d 47%
 
 _TRENDING = momentum strategies feed well. CHOPPY = expect your momentum bot to sit in cash a lot (correct behavior)._
 
 ## 5. Stablecoin pegs (mechanical stress gauge)
-- 🟢 **FDUSD** $0.9968 (-0.32% vs peg)
-- ⚪ **USDe** $0.9990 (-0.10% vs peg)
-- ⚪ **USDT** $0.9992 (-0.08% vs peg)
-- ⚪ **USDC** $0.9996 (-0.04% vs peg)
-- ⚪ **DAI** $1.0000 (+0.00% vs peg)
-- ⚪ **PYUSD** $1.0000 (+0.00% vs peg)
+- 🟢 **FDUSD** $0.9966 (-0.34% vs peg)
+- ⚪ **USDe** $0.9989 (-0.11% vs peg)
+- ⚪ **USDT** $0.9991 (-0.09% vs peg)
+- ⚪ **USDC** $0.9994 (-0.06% vs peg)
+- ⚪ **DAI** $0.9999 (-0.01% vs peg)
+- ⚪ **PYUSD** $1.0000 (-0.00% vs peg)
 
 _Flags at ±0.3%. Small persistent discounts = redemption friction; large = panic. Tail risk on depegs is total loss - observation, not a trade._
 
 ## 6. Volatility spike (dislocation weather siren)
-- ⚪ **BTC** 24h vol 40% vs 30d norm 34% (1.2x)
-- ⚪ **ETH** 24h vol 86% vs 30d norm 49% (1.7x)
+- ⚪ **BTC** 24h vol 46% vs 30d norm 35% (1.3x)
+- ⚪ **ETH** 24h vol 87% vs 30d norm 49% (1.8x)
 
 _>2x = markets dislocating; spreads widen and forced flows appear. Expect the momentum bot and basis gaps to behave unusually._
 
 ## 7. Funding persistence (days each perp has stayed crowded)
 | Perp | Days crowded | Funding now | Worst seen |
 |---|---|---|---|
-| PF_TRUMPUSD | 5 | -138.7% | 178.3% |
-| PF_NEARUSD | 2 | -110.2% | 198.4% |
-| PF_UNIUSD | 1 | -95.7% | 202.8% |
+| PF_TRUMPUSD | 6 | -49.1% | 178.3% |
+| PF_UNIUSD | 2 | +64.0% | 202.8% |
+
+**Resolved since last scan:** PF_NEARUSD (crowded 3d, worst 198%)
 
 _Persistence separates blips from durable structural payments - the raw evidence file for the funding-harvest hypothesis._
 
