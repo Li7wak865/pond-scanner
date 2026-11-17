@@ -1,67 +1,61 @@
 # Pond Scanner Report
-**Scan time:** 2026-11-16 22:04 UTC
+**Scan time:** 2026-11-17 07:56 UTC
 
-**Flags this scan:** 7 
+**Flags this scan:** 4 
 
 ## 1. Funding skew (crowded positioning)
 | | Perp | Annualized funding | 24h vol |
 |---|---|---|---|
-| 🟢 | PF_KAVAUSD | -150.2% | $14,453,494 |
-| 🟢 | PF_SPXUSD | -76.7% | $725,372 |
-| 🟢 | PF_ZROUSD | -55.4% | $697,678 |
-| 🟢 | PF_NEARUSD | -30.9% | $1,808,570 |
-| ⚪ | PF_ZIGUSD | -22.2% | $670,664 |
-| ⚪ | PF_SUIUSD | -16.6% | $2,439,663 |
-| ⚪ | PF_DOTUSD | -14.0% | $945,809 |
-| ⚪ | PF_ASTERUSD | -12.2% | $3,403,313 |
+| 🟢 | PF_ZROUSD | -90.7% | $810,114 |
+| 🟢 | PF_NEARUSD | +48.8% | $1,974,729 |
+| 🟢 | PF_ICPUSD | -41.9% | $560,336 |
+| ⚪ | PF_KAVAUSD | -27.2% | $9,670,466 |
+| ⚪ | PF_FILUSD | -15.9% | $603,738 |
+| ⚪ | PF_CRVUSD | -13.8% | $2,747,277 |
+| ⚪ | PF_SUIUSD | -13.1% | $2,017,299 |
+| ⚪ | PF_WLDUSD | -10.9% | $2,431,775 |
 
 _🟢 = crowd paying >30%/yr to hold a side. Historically mean-reverting; also a froth gauge. Rate math is approximate._
 
 ## 2. Cross-exchange basis (US venues)
-- ⚪ **BTC** gap **0.016%** (coinbase → gemini) — coinbase: $65,421.99, kraken: $65,427.20, gemini: $65,432.56
-- ⚪ **ETH** gap **0.019%** (kraken → gemini) — coinbase: $1,832.14, kraken: $1,831.96, gemini: $1,832.30
+- ⚪ **BTC** gap **0.039%** (gemini → kraken) — coinbase: $64,652.71, kraken: $64,657.00, gemini: $64,631.77
+- ⚪ **ETH** gap **0.059%** (gemini → kraken) — coinbase: $1,831.21, kraken: $1,831.22, gemini: $1,830.14
 
 _Gaps under ~0.3% are normal noise/fees. Persistent large gaps usually mean withdrawal friction somewhere — information either way._
 
 ## 3. Small-coin radar (ranks ~250-500, whale-free zone)
-| Coin | Rank | Mcap | 24h vol/mcap | 24h move |
-|---|---|---|---|---|
-| Aria.AI (ARIA) | #480 | $38.5M | 1.02x | -16.9% |
-| Cash Cat (CASHCAT) | #389 | $52.5M | 0.98x | +32.2% |
-
-_⚠️ WATCHLIST ONLY. Volume spikes in small coins are often pumps, listings, or news. Research before touching; never a buy signal by itself._
+Nothing unusual. ⚪
 
 ## 4. Volatility regime (feeds your momentum bot)
-- 🟢 **BTC: TRENDING** — efficiency ratio 0.51, realized vol 10d 46% vs 60d 41%
-- 🟢 **ETH: TRENDING** — efficiency ratio 0.47, realized vol 10d 63% vs 60d 51%
+- 🟢 **BTC: TRENDING** — efficiency ratio 0.55, realized vol 10d 45% vs 60d 39%
+- 🟢 **ETH: TRENDING** — efficiency ratio 0.47, realized vol 10d 63% vs 60d 48%
 
 _TRENDING = momentum strategies feed well. CHOPPY = expect your momentum bot to sit in cash a lot (correct behavior)._
 
 ## 5. Stablecoin pegs (mechanical stress gauge)
-- 🟢 **FDUSD** $0.9963 (-0.37% vs peg)
+- 🟢 **FDUSD** $0.9961 (-0.39% vs peg)
 - ⚪ **USDT** $0.9994 (-0.06% vs peg)
 - ⚪ **USDe** $0.9994 (-0.06% vs peg)
 - ⚪ **USDC** $0.9997 (-0.03% vs peg)
-- ⚪ **DAI** $1.0000 (-0.00% vs peg)
 - ⚪ **PYUSD** $1.0000 (-0.00% vs peg)
+- ⚪ **DAI** $1.0000 (+0.00% vs peg)
 
 _Flags at ±0.3%. Small persistent discounts = redemption friction; large = panic. Tail risk on depegs is total loss - observation, not a trade._
 
 ## 6. Volatility spike (dislocation weather siren)
-- ⚪ **BTC** 24h vol 53% vs 30d norm 42% (1.3x)
-- ⚪ **ETH** 24h vol 70% vs 30d norm 57% (1.2x)
+- ⚪ **BTC** 24h vol 51% vs 30d norm 42% (1.2x)
+- ⚪ **ETH** 24h vol 65% vs 30d norm 57% (1.1x)
 
 _>2x = markets dislocating; spreads widen and forced flows appear. Expect the momentum bot and basis gaps to behave unusually._
 
 ## 7. Funding persistence (days each perp has stayed crowded)
 | Perp | Days crowded | Funding now | Worst seen |
 |---|---|---|---|
-| PF_KAVAUSD | 3 | -150.2% | 169.0% |
-| PF_ZROUSD | 3 | -55.4% | 192.0% |
-| PF_NEARUSD | 3 | -30.9% | 245.2% |
-| PF_SPXUSD | 1 | -76.7% | 76.7% |
+| PF_ZROUSD | 4 | -90.7% | 192.0% |
+| PF_NEARUSD | 4 | +48.8% | 245.2% |
+| PF_ICPUSD | 1 | -41.9% | 41.9% |
 
-**Resolved since last scan:** PF_SOLUSD (crowded 2d, worst 837%), PF_TRUMPUSD (crowded 3d, worst 112%)
+**Resolved since last scan:** PF_KAVAUSD (crowded 4d, worst 169%), PF_SPXUSD (crowded 2d, worst 77%)
 
 _Persistence separates blips from durable structural payments - the raw evidence file for the funding-harvest hypothesis._
 
